@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        
+    }
+
+    .main {
+        width: 1263px;
+        height: 663px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .main .layer {
+        width: 1207px;
+        height: 645px;
+        border-radius: 128px 25px 34px 22px;
+        background: rgba(217, 217, 217, 0.20);
+        display: flex;
+
+    }
+
+    .main .layer .left .image {
+        position: relative;
+        left: 53px;
+        top: 12px;
+
+    }
+
+    .main .layer .left .login-card {
+        width: 505px;
+        height: 327px;
+        position: relative;
+        border-radius: 28px;
+        background: rgba(217, 217, 217, 0.16);
+        top: 0;
+        left: 100px;
+overflow: scroll;
+overflow-x: hidden;    }
+
+
+    .main .layer .right {
+        position: relative;
+        top: 45px;
+        left: 0;
+
+    }
+
+    h1 {
+        color: #FFF;
+        font-family: Orbitron;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+
+    }
+
+    .field {
+        color: whitesmoke;
+        display: grid;
+        justify-content: center;
+    }
+
+    form input {
+        height: 34px;
+        background: transparent;
+        width: 100%;
+        border: none;
+        color: whitesmoke;
+        border-bottom: 2px solid gray;
+
+    }
+
+
+
+    .main .layer .left .login-card form p {
+        display: grid;
+    }
+
+    .main .layer .left .login-card form label {
+        font-family: 'Orbitron', sans-serif;
+        color: whitesmoke;
+    }
+</style>
+
+<body>
+    <div style="display: flex;justify-content: center;">
+    <div class="main" style="background-image: url(.././../static/images/bg.png);">
+        <div class="layer">
+            <div class="left">
+
+                <div class="image">
+                    <img src="{% static 'images/white-logo-1.png'%}" alt="" width="150px">
+
+                </div>
+                <h1 style="position: relative;     left: 74px;
+                ">LUMINOUS AI TRANCRIPTION</h1>
+                <div class="login-card" >
+
+                    <div class="head" style="justify-content: center;
+                  display: flex;">
+
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <h1 style="text-align: center;">Register</h1>
+                            {{form.as_p}}
+                            <input type="submit" value="submit">
+                        </form>
+                    </div>
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor%}
+                    {% endif %}
+
+                </div>
+                <h1 style="    width: 367px;
+                height: 54px;
+                color: rgb(255 255 255 / 88%);
+                text-align: center;
+                font-family: Orbitron;
+                font-size: 25px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;">POWER PASSION TRUSTED SOLUTION</h1>
+
+            </div>
+            <div class="right">
+                <img src="{% static 'images/robo.png'%}" alt="">
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

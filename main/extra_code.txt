@@ -1,0 +1,11 @@
+
+
+def json_show(request, id):
+    audio = Audio.objects.get(id=id)
+    json_data = serializers.serialize('json', [audio]) 
+    return HttpResponse(json_data, content_type='application/json')
+
+def delete_content(request, id):
+    audio = Audio.objects.get(id=id)
+    audio.delete()
+    return HttpResponse('Successfully deleted')

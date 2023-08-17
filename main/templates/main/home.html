@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.page1{
+    
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../static/images/wallpaperavyaan.jpg');
+    background-size: cover;
+    background-repeat: no-repeat; 
+      color: aliceblue;
+
+}
+.logo-div{
+    width: 15%;
+
+    
+}
+.logo-div img{
+    width: 100%;
+    padding: 0.3vw;
+  }
+.page2{
+  
+    width: 90%;
+    height: 85%;
+    margin-left: 3.4vw;
+    padding: 2vw;
+    text-align: center;
+}
+.page2>h1{
+    /* background-color: #9
+    71f1f; */
+    font-size: 3.4vw;
+    letter-spacing: 0.3vw;
+    font-weight: 900;
+    text-shadow: 1px 1px 3px rgb(0, 0, 0);
+    font-family: serif;
+}
+.page2 i{
+    font-size: 3vw;
+    padding-top: 4vw;
+    
+
+}
+.page2 .box-p{
+  
+    width: 100%;
+    height: 30vh;
+    margin-top: 10vh;
+    display: flex;
+    justify-content: space-between;
+    padding: 1vw 4vw;
+}
+.box-p .box{
+    height: 11vw;
+   text-align: center;
+position: relative;
+border: solid;
+border-color: rgba(110, 102, 102, 0.834);
+    width: 11vw;
+    background-color: rgba(0, 255, 255, 0);
+    border-radius: 20%;
+    
+
+}
+.box h1{
+    position: absolute;
+    top: 40%;
+    left: 15%;
+}
+ .page2 .box-p2{
+    width: 72%;
+    height: 20vh;
+    margin-top: 1vh;
+    margin-left: 12vw;
+    display: flex;
+
+    justify-content: space-between;
+    padding: 1vw 4vw;
+
+}
+.box-p2 .box2{
+    padding-top: 1vw;
+    background-color: #baaeae9f;
+    width: 10vw;
+    height: 4vw;
+    border-radius: 40px;
+}
+
+
+
+
+/* Media Query for screens with a maximum width of 768px (e.g., tablets and mobile devices) */
+@media (max-width: 768px) {
+    .logo-div {
+        width: 20%;
+    }
+
+    .page2>h1 {
+        font-size: 5vw;
+    }
+
+    .page2 i {
+        font-size: 4vw;
+    }
+
+    .box-p .box {
+        height: 15vw;
+        width: 15vw;
+    }
+
+    .box h1 {
+        font-size: 2.8vw;
+    }
+
+    .box-p2 .box2 {
+        width: 13vw;
+        height: 8vw;
+        margin-top: -12vh;
+    }
+    .box2 h3{
+        font-size: 2.6vw;
+    }
+}
+
+
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    <div class="page1">
+       <div class="logo-div">
+        <img src="{% static 'images/logo.png'%}"  alt="">
+       </div>
+     <div class="page2">
+        <h1>LUMINOUS AI TRANSCRIPTION</h1>
+        <div class="box-p">
+            <i class="ri-arrow-left-line"></i>
+            <div class="box"><a href="{% url 'segment' %}"><h1>single person</h1></a> </div>
+            <div class="box"><a href="{% url 'audio' %}"><h1>2 person</h1></a> </div>
+            <div class="box"><a href="{% url 'manual_segment' %}"><h1>seggrigation</h1></a> </div>
+            <!-- <div class="box"><h1>Seg.</h1></div> -->
+            <i class="ri-arrow-right-line"></i>
+
+            
+            
+        </div>
+        <div class="box-p2">
+            <div class="box2"><h3>Input Text</h3></div>
+
+            <div class="box2">
+                <h3>Input Text</h3>
+            </div>
+            <div class="box2">
+                <h3>Input Text</h3>
+            </div>
+            <!-- <div class="box2">
+                <h3>Input Text</h3>
+            </div> -->
+            
+        </div>
+     </div>
+       
+    </div>
+    
+</body>
+</html>

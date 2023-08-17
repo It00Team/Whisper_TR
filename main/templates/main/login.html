@@ -1,0 +1,447 @@
+<!-- {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Righteous&display=swap" rel="stylesheet">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100vh;
+        font-family: 'Righteous', 'Anton', sans-serif;
+        overflow: hidden;
+        background-color: #020202;
+        justify-content: center;
+        display: grid;
+
+    }
+
+    .main {
+        width: 1300px;
+        height: 687px;
+        display: flex;
+    }
+
+    .main .left {
+        width: 50%;
+        height: 100%;
+        background: #030303;
+    }
+
+    .main .left .content h1,
+    p {
+        color: whitesmoke;
+    }
+
+    .main .right {
+        width: 50%;
+        height: 100%;
+        background: #020202;
+        overflow: visible;
+        position: relative;
+
+
+    }
+
+    .main .right .card {
+        width: 400px;
+        height: 500px;
+        background-color: transparent;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        backdrop-filter: blur(4px);
+        border-radius: 5px;
+        box-shadow: 10px -10px 5px rgb(0, 0, 0);
+    }
+
+    .main .right .card h1 {
+        color: whitesmoke;
+    }
+
+    .main .right .card .field {
+        color: whitesmoke;
+        display: grid;
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .main .right .card .field input {
+        height: 34px;
+        background: transparent;
+        width: 100%;
+        border: none;
+        color: whitesmoke;
+        border-bottom: 2px solid gray;
+
+    }
+
+    .main .right .card .btn {
+        padding: 20px;
+        justify-content: center;
+        display: flex;
+        gap: 10px;
+        padding-top: 30px;
+    }
+
+    .main .right .card .btn button {
+        padding: 5px;
+        color: whitesmoke;
+        width: 40%;
+        background: #00FFFF;
+        border: none;
+        font-size: large;
+        border-radius: 5px;
+        gap: 5%;
+        height: max-content;
+        font-family: 'Righteous', 'Anton', sans-serif;
+
+    }
+    .main .right .card .btn input {
+        padding: 5px;
+        color: whitesmoke;
+        width: 40%;
+        background: #00FFFF;
+        border: none;
+        font-size: large;
+        border-radius: 5px;
+        gap: 5%;
+        height: max-content;
+        font-family: 'Righteous', 'Anton', sans-serif;
+    }
+    .main .right .card .btn button:hover {
+        background: #03d6d6;
+
+    }
+    .main .right .card .btn input:hover{
+        background: #03d6d6 !important;
+    }
+
+    .main .right .card .head {
+        padding: 40px;
+        justify-content: center;
+        display: flex;
+    }
+
+    .main .right .one-circle {
+        width: 390px;
+        height: 390px;
+        left: -10%;
+        position: relative;
+    }
+
+    .main .right .one-circle .one {
+        width: 100%;
+        height: 100%;
+        background-color: #FF00FF;
+        clip-path: circle(47.7% at 49% 0);
+    }
+
+    .main .right .two-circle {
+        width: 300px;
+        height: 300px;
+        top: 30%;
+        right: 0;
+        position: absolute;
+    }
+
+    .main .right .two-circle .two {
+        clip-path: circle(47.7% at 100% 49%);
+        width: 100%;
+        height: 100%;
+        background-color: #00FFFF;
+    }
+
+    .main .right .three-circle {
+        width: 642px;
+        height: 300px;
+        left: -41%;
+        position: absolute;
+    }
+
+    .main .right .three-circle .three {
+        clip-path: circle(40.7% at 53% 100%);
+        background-color: #FFFF00;
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        position: relative;
+    }
+
+    header {
+        height: max-content;
+        width: 100%;
+        background: transparent;
+    }
+
+    .main .left .content {
+        top: 30%;
+        padding: 50px;
+        position: relative;
+        height: max-content;
+        width: 300px;
+        z-index: 101;
+    }
+
+    .main .left .head-phone {
+        position: absolute;
+        top: 15%;
+        width: 650px;
+        left: 0;
+        z-index: 100;
+    }
+
+    .main .left .photo {
+        position: fixed;
+    }
+</style>
+
+<body>
+    <div class="main">
+
+        <div class="left">
+            <img src="{% static 'images/white-logo-1.png'%}" alt="Avyaan-logo" width="150px">
+            <div class="photo">
+
+                <img src="{% static 'images/2.png'%}" alt="head-phone" class="head-phone">
+            </div>
+            <div class="content">
+                <h1>From sound waves to written waves</h1>
+                <p>transcribing the melodies of conversation</p>
+            </div>
+
+        </div>
+
+        <div class="right">
+            <div class="one-circle">
+                <div class="one">
+
+                </div>
+            </div>
+            <div class="card">
+                <div class="head">
+
+                    <h1>Login</h1>
+                </div>
+                <div class="field">
+
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                </div>
+                <div class="btn" style="justify-content: center; display: flex; gap: 30px;">
+
+                    <input type="submit" value="Login">
+
+                    </form>
+                    <button><a href="{% url 'signup' %}" style="text-decoration: none; color: whitesmoke;">register</a></button>
+                </div>
+                {% if messages %}
+                {% for message in messages %}
+                <p>{{message}}</p>
+                {% endfor%}
+                {% endif %}
+            </div>
+            <div class="two-circle">
+                <div class="two">
+
+                </div>
+            </div>
+            <div class="three-circle">
+                <div class="three">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .main {
+        width: 1263px;
+        height: 663px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .main .layer {
+        width: 1207px;
+        height: 645px;
+        border-radius: 128px 25px 34px 22px;
+        background: rgba(217, 217, 217, 0.20);
+        display: flex;
+
+    }
+
+    .main .layer .left .image {
+        position: relative;
+        left: 53px;
+        top: 12px;
+
+    }
+
+    .main .layer .left .login-card {
+        width: 505px;
+        height: 327px;
+        position: relative;
+        border-radius: 28px;
+        background: rgba(217, 217, 217, 0.16);
+        top: 0;
+        left: 100px;
+
+    }
+   
+
+    .main .layer .right {
+        position: relative;
+        top: 45px;
+        left: 0;
+
+    }
+
+    h1 {
+        color: #FFF;
+        font-family: Orbitron;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+
+    }
+    .field {
+        color: whitesmoke;
+        display: grid;
+    justify-content: center;
+    }
+    .field input {
+        height: 34px;
+        background: transparent;
+        width: 100%;
+        border: none;
+        color: whitesmoke;
+        border-bottom: 2px solid gray;
+        
+    }
+    .field label {
+        font-family: 'Orbitron',sans-serif;
+    }
+    .main .layer .left .login-card .btn button {
+        padding: 5px;
+        color: whitesmoke;
+        width: 20%;
+        background: #00FFFF;
+        border: none;
+        font-size: large;
+        border-radius: 5px;
+        gap: 5%;
+        height: max-content;
+        font-family: 'Orbitron', 'Anton', sans-serif;
+
+    }
+    .main .layer .left .login-card .btn input {
+        padding: 5px;
+        color: rgb(0, 0, 0);
+        width: 20%;
+        background: #00FFFF;
+        border: none;
+        font-size: large;
+        border-radius: 5px;
+        gap: 5%;
+        height: max-content;
+        font-family: 'Orbitron', 'Anton', sans-serif;
+    }
+</style>
+
+<body>
+    <div style="display: flex;justify-content: center;">
+    <div class="main" style="background-image: url(.././../static/images/bg.png);">
+        <div class="layer">
+            <div class="left">
+
+                <div class="image">
+                    <img src="{% static 'images/white-logo-1.png'%}" alt="" width="150px">
+
+                </div>
+                <h1 style="position: relative;     left: 74px;
+                ">LUMINOUS AI TRANCRIPTION</h1>
+                <div class="login-card">
+
+                    <div class="head" style="justify-content: center;
+                    display: flex;">
+
+                        <h1>Login</h1>
+                    </div>
+                    <div class="field">
+
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            {{form.as_p}}
+                    </div>
+                    <div class="btn" style="justify-content: center; display: flex; gap: 30px;">
+
+                        <input type="submit" value="Login">
+
+                        </form>
+                        <button><a href="{% url 'signup' %}"
+                                style="text-decoration: none; color: rgb(0, 0, 0);">Register</a></button>
+                    </div>
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor%}
+                    {% endif %}
+
+                </div>
+                <h1 style="    width: 367px;
+                height: 54px;
+                color: rgb(255 255 255 / 88%);
+                text-align: center;
+                font-family: Orbitron;
+                font-size: 25px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;">POWER PASSION TRUSTED SOLUTION</h1>
+
+            </div>
+            <div class="right">
+                <img src="{% static 'images/robo.png'%}" alt="">
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

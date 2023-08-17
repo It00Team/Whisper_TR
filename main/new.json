@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "avyaan",
+  "private_key_id": "c50c8765ffeb57fc4f22215cc25f15da36feb6f3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDGUTwEI5IPiUkF\nNj4XQgpJNV92h1vi1HKOijPx+ao6pBQYyMDPZKCXfi29PzFgOE0LkTUlKcwxevV/\n9pIV89XhVtwYsJQ27iKsRWHNt/WPvGArzUm8K+F4oZAv0uKCb5cEz6MBP371LhFU\nbGGdyqmrvMPfc/OZME/uaPbiW7/lAM26P7oL7HJROUto60AyWGXerkXQOUgZq5G+\nwW2HEyzvZ0ej0fpizgjl8dpyOEq3GCmlnCO5+4HScIjUka95B7ibbZxOhZ5Oz9UQ\nEMNm72TDIgv2KHG7qyNXJUwG0ccF7Y+Be61m2dDKoI48M7N3wGR7KvJ7tMVDc/AK\nTYrgCQ31AgMBAAECggEAMCFwCOsfHEEr5SVsfVWMTIc1E323eb4ozVpSUBRRUakX\nrYovbUYVSZ8Yd7kaASm43SlRNiNGSO34HiXX/5btniJoCV/1oL070gaGvZg7czZ7\nOrY4goA92PqRFWI/kfuGMec4vulLpTKYhx5EtLiGZEVMXnN0OAYHKCv2Wyp8UJXr\nPKJzUscrAxe/zFz/up1ftz8wq1DY88f2u7MOV2qt5lzB9aEjknwOTQUxwB3rZi1n\n9qYIz8T3YSWcLNg6zqeU9i/A4hAncXSElGIXcru8QVkxHYclyN9mwt/UOO5G/+2Z\n2aHdQGM518qRPhtvVndt3IAGZnTszW/5BbmDJKt6IQKBgQDwqkaQ8pZoG5uz6jZA\nEBXUr5elucO1c6LOGiZBJCOfpiRDi3h0RUqB+SLIMVDw5bLksJn8OxLOqV66TrVH\nQqn7j8xtIXq4EY/T/xKyCEGkZrtd1EgkvBJ0wcyGLHmzGhosy+5z43G1th2pdbi9\nwednSIyOia4iFpJ1z4sNryjrsQKBgQDS9C6hBxON96tnMR2yiacuGc3edLxe5qAE\ncGe7n/nW778erYyhaRgYkWnDvq8S/4Tk1iNb6ZczOh1JDincs8XKiWzXjrDSwSIy\nD7O8S04ry0wC4qiZSeeBYD9p3Y4V/oCey90v0e1BqvH7MWOO+Bcw8colfSNrU+H6\nIDG7b4YLhQKBgByv72FvyUX3pIO5s2XHhRKpK6Zxkkaa1hlDPLQfHq/1GfWDNoSF\njfAYRnEej8tnVf+0nWZXlFJWFhiXMTyhUanO5ktL5ljynvZiPVRDb6+tH0B8AW1/\njaOlRj/oJUmYHu6gEHh38CH852Q/yBm2d2L0XuzOtJcTobmxV5319ybBAoGARuRY\nZzUBlUwOBfezizRHQm7ZiFCinSHT1KoRsjPouhqHl7+q6vNubZMwf9+s5i2Ic36j\nE1hEv6pf/RUNbGXdqlrUgPwq4CiXXUt5k2WbN4xyVuXk0t7LNecqaGFURn/oqXTJ\nODDMEq1n9Ip8cqdc483dqQuMw5zE7FG1ZM/ttCECgYBlOB4dzCRix6W1sSnsDHRI\nMyIOtL+JvR/AdZAZBNaXUDivf0f7rCtWLZiI1sgvRhDSFTYz8C2GiBwFuFZsHUl5\nmSjbYLZT/yQKMtozhrCraucPNdJFONRsbim6YCgyqXj/DmEQUSZnOssJIkfnvHmQ\nylcdOLEtnzTCTZBPHd5bow==\n-----END PRIVATE KEY-----\n",
+  "client_email": "avyaanmgmt@avyaan.iam.gserviceaccount.com",
+  "client_id": "110933975132114638313",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/avyaanmgmt%40avyaan.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
