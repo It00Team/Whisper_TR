@@ -4,18 +4,15 @@ from google.oauth2 import service_account
 def get_languages():
     pass
 
-def transcribe_diarization_gcs_beta(gcs_uri: str, language, speaker_count):
-    
+def transcribe_diarization_gcs_beta(gcs_uri: str, language, speaker_count):    
     client_file =r'F:\avyaan\tr_2\main\api.json'
     credentials = service_account.Credentials.from_service_account_file(client_file)
     client = speech.SpeechClient(credentials=credentials)
-
     speaker_diarization_config = speech.SpeakerDiarizationConfig(
         enable_speaker_diarization=True,
         min_speaker_count=speaker_count,
         max_speaker_count=2,
     )
-
     recognition_config = speech.RecognitionConfig(
         encoding=speech.RecognitionConfig.AudioEncoding.ENCODING_UNSPECIFIED,
         language_code=language,

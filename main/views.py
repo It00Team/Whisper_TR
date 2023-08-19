@@ -15,7 +15,6 @@ from django.core import serializers
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from pydub import AudioSegment
-import shutil
 from datetime import timedelta
 
 def user_login(request):

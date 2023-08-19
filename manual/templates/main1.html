@@ -85,7 +85,6 @@
           <b id="time-current">0.00</b> / <b id="time-total">0.00</b>
         </div>
         <div class="w3-half w3-container">
-          <!-- <a href="{% url 'upload_audio_file' %}" method="post">hello </a> -->
           <input
             id="audio-file"
             name
@@ -659,12 +658,30 @@
       }
 
       // load audio starts
+      // function loadAudio() {
+      //   var element = document.getElementById("audio-file");
+      //   if (element.files[0].type !== "audio/mpeg") {
+      //     alert("Invalid Format");
+      //     return;
+      //   }
+
+      //    change the audio file format
+      
       function loadAudio() {
-        var element = document.getElementById("audio-file");
-        if (element.files[0].type !== "audio/mpeg") {
-          alert("Invalid Format");
-          return;
-        }
+         var element = document.getElementById("audio-file");
+         var supportedFormats = ["audio/mpeg", "audio/wav"];
+
+          if (!element.files[0]) {
+              alert("No file selected");
+              return;
+          }
+
+          if (supportedFormats.includes(element.files[0].type)) {
+          } else {
+              alert("Invalid Format");
+              return;
+          }
+
         audioFile = element.files[0];
         if (wavesurfer !== undefined) wavesurfer.destroy();
         wavesurfer = WaveSurfer.create({
