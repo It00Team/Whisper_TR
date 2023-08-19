@@ -11,6 +11,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from pydub import AudioSegment as asp
 import whisper
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 def my_function(request):
