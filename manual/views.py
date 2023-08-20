@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse , redirect
 import json
 from datetime import datetime
-from .serializers import AudioSegmentSerializer,MainSerializer,JsonDataSerializer
+from .serializers import AudioSegmentSerializer,MainSerializer,JsonDataSerializer,WisperSerializer
 from .models import MyAudio
 from .models import MyAudio, MyAudiomain
 from datetime import datetime
@@ -14,7 +14,31 @@ import whisper
 
 def my_function(request):
     return render(request, 'main1.html')
-
+def my_function_new(request):
+    return render(request, 'index.html')
+class Whisper_TR(APIView):
+    def post(self, request,format=None):
+        serializer = WisperSerializer(data=request.data)
+        print(serializer)
+        if serializer.is_valid():
+            name = serializer.validated_data['name']
+            print(name)
+            audio = request.FILES['audio']
+            print(type(audio))
+            audio_path = "C:\\Users\\91722\\Desktop\\git vala folder\\Whisper_TR\\media\\" + str(audio)
+            with open(audio_path, 'wb') as audio_file:
+                audio_file.write(request.FILES['audio'].read())
+            model = whisper.load_model("base")
+            result = model.transcribe(audio_path)
+            data = result["text"]
+            # audio = request.FILES('audio')
+            # audio = serializer.validated_data['audio']
+            # print(audio)
+            print("saving")
+            serializer.save(description="raju")
+            print("done")
+            return Response(data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CreateJsonFileView(APIView):
     def post(self, request, format=None):

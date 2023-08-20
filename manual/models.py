@@ -5,7 +5,12 @@ class MyAudio(models.Model):
     start_time = models.FloatField(null=True)
     end_time = models.FloatField(null=True)
     description = models.TextField(max_length=100000,null=True)
+
 class MyAudiomain(models.Model):
+    name = models.CharField(max_length=255,null=True)
+    audio_file = models.FileField(upload_to='my_audio',null=True)
+    description = models.TextField(max_length=10000000,null=True)
+class MyMainAudio(models.Model):
     name = models.CharField(max_length=255,null=True)
     audio_file = models.FileField(upload_to='my_audio',null=True)
     description = models.TextField(max_length=10000000,null=True)

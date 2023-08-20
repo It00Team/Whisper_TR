@@ -39,68 +39,40 @@
     text-align: center;
 }
 .page2>h1{
-    /* background-color: #9
-    71f1f; */
-    font-size: 3.4vw;
+    font-size: 4vw;
     letter-spacing: 0.3vw;
     font-weight: 900;
+    margin-left: 2rem;
     text-shadow: 1px 1px 3px rgb(0, 0, 0);
     font-family: serif;
-}
-.page2 i{
-    font-size: 3vw;
-    padding-top: 4vw;
-    
-
 }
 .page2 .box-p{
   
     width: 100%;
-    height: 30vh;
-    margin-top: 10vh;
+    height: 60vh;
+    margin-top: 1vh;
     display: flex;
     justify-content: space-between;
     padding: 1vw 4vw;
 }
 .box-p .box{
-    height: 11vw;
-   text-align: center;
-position: relative;
-border: solid;
-border-color: rgba(110, 102, 102, 0.834);
-    width: 11vw;
-    background-color: rgba(0, 255, 255, 0);
-    border-radius: 20%;
-    
+    height: max-content;
+    text-align: center;
+    align-items:center;
+    width: 80%;
 
+}
+.box-p .box a{
+    text-decoration: none;
 }
 .box h1{
-    position: absolute;
-    top: 40%;
-    left: 15%;
+    margin: 20px;
+    margin-left: 7rem;
+    margin-top: 4rem;
+    padding: 20px;
+    color: rgb(0, 0, 0);
+    background-color: rgba(213, 178, 230, 0.637);
 }
- .page2 .box-p2{
-    width: 72%;
-    height: 20vh;
-    margin-top: 1vh;
-    margin-left: 12vw;
-    display: flex;
-
-    justify-content: space-between;
-    padding: 1vw 4vw;
-
-}
-.box-p2 .box2{
-    padding-top: 1vw;
-    background-color: #baaeae9f;
-    width: 10vw;
-    height: 4vw;
-    border-radius: 40px;
-}
-
-
-
-
 /* Media Query for screens with a maximum width of 768px (e.g., tablets and mobile devices) */
 @media (max-width: 768px) {
     .logo-div {
@@ -119,22 +91,19 @@ border-color: rgba(110, 102, 102, 0.834);
         height: 15vw;
         width: 15vw;
     }
-
-    .box h1 {
-        font-size: 2.8vw;
-    }
-
-    .box-p2 .box2 {
-        width: 13vw;
-        height: 8vw;
-        margin-top: -12vh;
-    }
-    .box2 h3{
-        font-size: 2.6vw;
-    }
 }
-
-
+.google{
+    width: 40%;
+    height: 100%;
+}
+.whisper{
+    width: 40%;
+    height: 100%;
+}
+.content{
+    margin-top: 3rem;
+    font-size: 4rem;
+}
     </style>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
 </head>
@@ -146,29 +115,14 @@ border-color: rgba(110, 102, 102, 0.834);
      <div class="page2">
         <h1>LUMINOUS AI TRANSCRIPTION</h1>
         <div class="box-p">
-            <i class="ri-arrow-left-line"></i>
-            <div class="box"><a href="{% url 'segment' %}"><h1>single person</h1></a> </div>
-            <div class="box"><a href="{% url 'audio' %}"><h1>2 person</h1></a> </div>
-            <div class="box"><a href="{% url 'manual_segment' %}"><h1>seggrigation</h1></a> </div>
-            <!-- <div class="box"><h1>Seg.</h1></div> -->
-            <i class="ri-arrow-right-line"></i>
-
-            
-            
-        </div>
-        <div class="box-p2">
-            <div class="box2"><h3>Input Text</h3></div>
-
-            <div class="box2">
-                <h3>Input Text</h3>
+            <div class="google"><div class="content">Google API</div>
+                <div class="box"><a href="{% url 'segment' %}"><h1>Segment</h1></a> </div>
+                <div class="box"><a href="{% url 'audio' %}"><h1>No_Segment</h1></a> </div>
             </div>
-            <div class="box2">
-                <h3>Input Text</h3>
+            <div class="whisper"><div class="content">Whisper AI</div>
+            <div class="box"><a href="{% url 'manual_segment' %}"><h1>Segment</h1></a> </div>
+                <div class="box"><a href="{% url 'nosegment' %}"><h1>No_Segment</h1></a> </div>
             </div>
-            <!-- <div class="box2">
-                <h3>Input Text</h3>
-            </div> -->
-            
         </div>
      </div>
        
