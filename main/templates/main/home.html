@@ -15,19 +15,21 @@
     
     width: 100vw;
     height: 100vh;
-    background-image: url('../../static/images/wallpaperavyaan.jpg');
+    background-image: linear-gradient(to bottom right,rgb(251, 218, 50),rgb(70, 202, 255));
+    /* background-image: url('../../static/images/wallpaperavyaan.jpg'); */
     background-size: cover;
     background-repeat: no-repeat; 
       color: aliceblue;
 
 }
 .logo-div{
-    width: 15%;
-
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    height: 15%;
     
 }
 .logo-div img{
-    width: 100%;
+    width: 18%;
     padding: 0.3vw;
   }
 .page2{
@@ -43,6 +45,7 @@
     letter-spacing: 0.3vw;
     font-weight: 900;
     margin-left: 2rem;
+    background-color: rgb(254, 136, 46);
     text-shadow: 1px 1px 3px rgb(0, 0, 0);
     font-family: serif;
 }
@@ -71,7 +74,7 @@
     margin-top: 4rem;
     padding: 20px;
     color: rgb(0, 0, 0);
-    background-color: rgba(213, 178, 230, 0.637);
+    background-color: rgb(4, 217, 255);
 }
 /* Media Query for screens with a maximum width of 768px (e.g., tablets and mobile devices) */
 @media (max-width: 768px) {
@@ -103,6 +106,19 @@
 .content{
     margin-top: 3rem;
     font-size: 4rem;
+    color: black;
+    background-color: rgb(255, 242, 0);
+}
+#btn_primary{
+    position: relative;
+    left: 70%;
+    top: -35%;
+    padding: 10px 20px;
+}
+#btn_primary a{
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: rgb(31, 112, 182);
 }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
@@ -110,16 +126,17 @@
 <body>
     <div class="page1">
        <div class="logo-div">
-        <img src="{% static 'images/logo.png'%}"  alt="">
+        <img src="{% static 'images/white-logo-1.png'%}"  alt="">
+        <button id="btn_primary"><a href="{% url 'logout' %}">LOG_OUT</a></button>
        </div>
      <div class="page2">
         <h1>LUMINOUS AI TRANSCRIPTION</h1>
         <div class="box-p">
-            <div class="google"><div class="content">Google API</div>
+            <div class="google"><div class="content">Using_Local</div>
                 <div class="box"><a href="{% url 'segment' %}"><h1>Segment</h1></a> </div>
                 <div class="box"><a href="{% url 'audio' %}"><h1>No_Segment</h1></a> </div>
             </div>
-            <div class="whisper"><div class="content">Whisper AI</div>
+            <div class="whisper"><div class="content">International</div>
             <div class="box"><a href="{% url 'manual_segment' %}"><h1>Segment</h1></a> </div>
                 <div class="box"><a href="{% url 'nosegment' %}"><h1>No_Segment</h1></a> </div>
             </div>

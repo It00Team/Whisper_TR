@@ -21,8 +21,8 @@ class Whisper_TR(APIView):
         serializer = WisperSerializer(data=request.data)
         print(serializer)
         if serializer.is_valid():
-            name = serializer.validated_data['name']
-            print(name)
+            # name = serializer.validated_data['name']
+            # print(name)
             audio = request.FILES['audio']
             print(type(audio))
             audio_path = "C:\\Users\\91722\\Desktop\\git vala folder\\Whisper_TR\\media\\" + str(audio)
@@ -79,6 +79,14 @@ class manseg(APIView):
                 audio_file.write(request.FILES['audio_file'].read())
             a1 = "C:\\tr_2\\media\\audio_file\\" + str(audio)
             file_take = asp.from_file(a1)
+            # set_frame_rate
+            sample_rate = file_take.frame_rate
+            samplerate = file_take.set_frame_rate(44100)
+            print(samplerate)
+            print(type(samplerate))
+            samplerate.export(f'C:\\Users\\91722\\Desktop\\git vala folder\\Whisper_TR\\media\\{audio}', format="wav")
+            # samplerate.export(r'C:\\Users\\91722\\Desktop\\git vala folder\\Whisper_TR\\media\\audio\\raju.wav', format="wav")
+            print("Sample Rate:", sample_rate, "Hz")
             z1 = int(strt * 1000)
             z2 = int(end * 1000)
             segment = file_take[z1 : z2]

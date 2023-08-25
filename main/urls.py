@@ -14,5 +14,6 @@ urlpatterns = [
     path('update/<int:id>/' , views.update_content , name="update"),
     path('download_json/<int:id>/', views.download_json, name='download_json'),
     path('my_json/<int:id>/', views.my_json, name='my_json'),
+    path('G_segment', views.Segmented_Text.as_view(), name='myapi'),
 
 ]

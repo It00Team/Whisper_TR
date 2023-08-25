@@ -724,14 +724,17 @@
         });
         wavesurfer.on("region-created", function (newRegion) {
           var audioTracks = document.getElementById("audio-tracks").tBodies[0];
+          console.log("is this")
           console.log(audioTracks.childNodes);
+          console.log(typeof audioTracks.childNodes);
           var tableRow = createAudioRow(
             new Array(newRegion.id, newRegion.start, newRegion.end)
-          );
-          audioTracks.appendChild(tableRow);
-
-          showAndHideMergeOption();
-        });
+            );
+            audioTracks.appendChild(tableRow);
+            showAndHideMergeOption();
+          });
+          let raju = document.querySelector('.w3-hover-text-green')
+          console.log(raju[0])
         wavesurfer.on("region-update-end", function (newRegion) {
           document.getElementById(newRegion.id + 1).innerText =
             0 >= newRegion.start.toFixed(4) ? 0 : newRegion.start.toFixed(4);

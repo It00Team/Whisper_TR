@@ -9,6 +9,11 @@ from .deleteFile  import *
 from .segment  import *
 from .speakerFile  import *
 import os
+from rest_framework import status
+import pydub
+from pydub import AudioSegment
+
+from rest_framework.response import Response
 from django.core.files.storage import default_storage
 import json
 from django.core import serializers
@@ -16,6 +21,8 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from pydub import AudioSegment
 from datetime import timedelta
+from .serializers import AudioService
+from rest_framework.decorators import APIView
 
 def user_login(request):
     if not request.user.is_authenticated:
@@ -28,6 +35,7 @@ def user_login(request):
                 user = User.objects.get(username=username)
                 if user is  None :
                     messages.error(request, "User does not exist")
+                    print("User logged in")
                     return redirect('login')
                 
                 user = authenticate(username=username, password=password)
@@ -42,7 +50,7 @@ def user_login(request):
         form = LoginForm()
         return render(request , 'main/login.html' , {'form': form})
 
-    return redirect('/login/')
+    return redirect('/home/')
 
 def user_signup(request):
     if request.method == 'POST':
@@ -244,5 +252,79 @@ def download_json(request, id):
         return response
     except Audio.DoesNotExist:
         return HttpResponse("Audio not found", status=404)
+
+class Segmented_Text(APIView): 
+    def post(self, request,format=None):
+      serializer = AudioService(data = request.data)
+      print(serializer)
+      language = request.POST.get('language')
+      if serializer.is_valid():
+          print(language)
+          audio1 = request.FILES.get('Audio_File')
+          file_take = AudioSegment.from_file(audio1)
+          sample_rate = file_take.frame_rate
+          samplerate = file_take.set_frame_rate(44100)
+          sample_width_bytes = file_take.sample_width
+          print("Sample Rate:", sample_rate, "Hz")
+          bits_per_sample = sample_width_bytes
+        #   bits_per_sample = sample_width_bytes * 8
+          print(f"Bits per sample: {bits_per_sample}")
+          file_path = f'C:\\Users\\91722\\Desktop\\git vala folder\\Whisper_TR\\media\\{audio1}'
+          samplerate.export(file_path, format="wav")
+          client = storage.Client(credentials=service_account.Credentials.from_service_account_file(r'C:\\tr_2\\main\\new.json'))
+          bc_name = "avyaan_mgmt"
+          bucket = client.bucket(bc_name)
+        #   audio_path = r"C:\\Users\\91722\\Desktop\\git vala folder\\Whisper_TR\\media\\audio\\" + str(audio1)
+          audio_path = file_path
+          blob = bucket.blob(audio_path)
+          blob.upload_from_filename(audio_path)
+          gcs_uri = r'gs://' + bc_name + '/' + audio_path
+          audio = speech.RecognitionAudio(uri=gcs_uri)
+          client_file =r'C:\\tr_2\\main\\new.json'
+          credentials = service_account.Credentials.from_service_account_file(client_file)
+          client1 = speech.SpeechClient(credentials=credentials)
+          diarization_config = speech.SpeakerDiarizationConfig(
+          enable_speaker_diarization=True,
+          min_speaker_count=2,
+          max_speaker_count=2,    )
+          config = speech.RecognitionConfig(
+            encoding=speech.RecognitionConfig.AudioEncoding.ENCODING_UNSPECIFIED,
+            sample_rate_hertz=44100,
+            audio_channel_count=2,
+            language_code=language,
+            diarization_config=diarization_config,    )
+          response = client1.long_running_recognize(
+          config=config, audio=audio).result()
+          sentences = []
+          current_sentence = ""
+          current_speaker_tag = None
+          start_time = None
+          for result in response.results:
+              for word_info in result.alternatives[0].words:
+                  if word_info.speaker_tag in [2, 1]:  # Only consider speaker 1 and speaker 2
+                      if current_speaker_tag is None:
+                        current_speaker_tag = word_info.speaker_tag
+                        start_time = word_info.start_time
+                      if current_speaker_tag == word_info.speaker_tag:
+                        current_sentence += word_info.word + " "
+                      else:
+                          sentences.append((current_sentence.strip(), current_speaker_tag, start_time, word_info.end_time))
+                          current_sentence = word_info.word + " "
+                          current_speaker_tag = word_info.speaker_tag
+                          start_time = word_info.start_time
+          sentences.append((current_sentence.strip(), current_speaker_tag, start_time, word_info.end_time))
+          final = ""
+          for sentence, speaker_tag, start_time, end_time in sentences:
+              final += " Speaker" + str(speaker_tag) +  " : "+ "Start Time: " + str(start_time) +  ' End Time: '+ str(end_time) +  " : " + sentence + "\n" 
+          print(final)
+          bucket = client.bucket(bc_name)
+          file_blob = bucket.blob(audio_path)
+          file_blob.delete()   
+          print("deleted") 
+          serializer.save(name=str(audio1),description=final)
+          print("Success")
+          return Response({"msg": final}, status=status.HTTP_201_CREATED)
+      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
