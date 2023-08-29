@@ -85,10 +85,10 @@ class manseg(APIView):
             print(samplerate)
             print(type(samplerate))
             samplerate.export(f'C:\\Users\\91722\\Desktop\\git vala folder\\Whisper_TR\\media\\{audio}', format="wav")
-            # samplerate.export(r'C:\\Users\\91722\\Desktop\\git vala folder\\Whisper_TR\\media\\audio\\raju.wav', format="wav")
             print("Sample Rate:", sample_rate, "Hz")
             z1 = int(strt * 1000)
             z2 = int(end * 1000)
+            print(z1,z2)
             segment = file_take[z1 : z2]
             date = str(datetime.now())
             fdate = date.replace(' ', '_').replace('.', '_').replace(':', '_').replace('-', '_')

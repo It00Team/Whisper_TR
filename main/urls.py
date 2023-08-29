@@ -15,5 +15,6 @@ urlpatterns = [
     path('download_json/<int:id>/', views.download_json, name='download_json'),
     path('my_json/<int:id>/', views.my_json, name='my_json'),
     path('G_segment', views.Segmented_Text.as_view(), name='myapi'),
+    path('N_G_segment', views.No_Segmented_Text.as_view(), name='mynewapi'),
 
 ]

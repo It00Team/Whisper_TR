@@ -123,8 +123,7 @@
         </table>
       </div>
       <br />
-      <div id="merge-option" class="w3-hide">
-      </div>
+      <div id="merge-option" class="w3-hide"></div>
       <footer class="w3-display-bottom">
         <hr />
         <div style="text-align: center; margin-top: 10px">
@@ -139,7 +138,13 @@
           <button class="btn btn-danger">Delete</button>
         </div>
       </footer>
-      <textarea class="txt" id="responseData" class="responseData" rows="" cols=""></textarea>
+      <textarea
+        class="txt"
+        id="responseData"
+        class="responseData"
+        rows=""
+        cols=""
+      ></textarea>
       <button id="getNewData">Get Data</button>
       <textarea class="txt1" id="manualDescription" rows="" cols=""></textarea>
       <button class="btn_pri" id="btn-save">SUBMIT</button>
@@ -240,7 +245,7 @@
                 token = getCookie("csrftoken");
 
                 const response = await axios.post(
-                   "http://127.0.0.1:8000/manual/final/",
+                  "http://127.0.0.1:8000/manual/final/",
                   //"http://192.168.2.138:8000/manual/final/",
                   {
                     xsrfCookieName: "csrftoken",
@@ -266,6 +271,31 @@
     </div>
 
     <script>
+      function secondsToHHMMSS2(seconds) {
+        // Get the hours, minutes, and seconds from the seconds.
+        seconds = parseInt(seconds);
+        hours = Math.floor(seconds / 3600);
+        minutes = Math.floor((seconds % 3600) / 60);
+        seconds = seconds % 60;
+
+        // Pad the hours, minutes, and seconds with zeros if necessary.
+        hours = pad(hours, 2);
+        minutes = pad(minutes, 2);
+        seconds = pad(seconds, 2);
+
+        // Return the formatted string.
+        return `${hours}:${minutes}:${seconds}`;
+      }
+
+      // Helper function to pad a number with zeros.
+      function pad(number, length) {
+        string = number.toString();
+        while (string.length < length) {
+          string = "0" + string;
+        }
+        return string;
+      }
+
       function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== "") {
@@ -321,10 +351,10 @@
       }
 
       let monuData;
-      document.querySelector('#getNewData').addEventListener("click",()=>{
+      document.querySelector("#getNewData").addEventListener("click", () => {
         document.querySelector("#responseData").value = monuData;
-        console.log(monuData)
-      })
+        console.log(monuData);
+      });
 
       let manualClickHandler = () => {
         document.querySelector(".mydiv").style.display = "initial";
@@ -364,8 +394,8 @@
         formData.append("audio_file", audio_file);
         my_cookie = getCookie("csrftoken");
         axios
-           .post("http://127.0.0.1:8000/manual/segments/", formData, {
-          //.post("http://192.168.2.138:8000/manual/segments/", formData, {
+          .post("http://127.0.0.1:8000/manual/segments/", formData, {
+            //.post("http://192.168.2.138:8000/manual/segments/", formData, {
             headers: {
               "Content-Type": "audio/mp3",
               "X-CSRFToken": my_cookie,
@@ -388,8 +418,6 @@
       function encodeWav(buffer) {
         const wavHeader = new Int8Array(44);
         const dv = new DataView(wavHeader.buffer);
-
-        // RIFF identifier 'RIFF'
         dv.setUint32(0, 1380533830, false);
         // file length minus RIFF identifier length and file description length
         dv.setUint32(4, 36 + buffer.length * 1, true);
@@ -457,15 +485,17 @@
           } else {
             tableData = document.createElement("td");
             tableData.innerText = arr[i].toFixed(4);
+            console.log(arr, "------------------------------");
           }
           //starting and ending data is save here in array
           tableData.setAttribute("id", arr[0] + i);
-          // console.log(tableData)
+
           data.push(tableData);
+
           tableRow.appendChild(tableData);
         }
 
-        console.log(data);
+        // console.log(data);
 
         var actionsArray = new Array(
           { action: "play", iconClass: "fa fa-play-circle-o" },
@@ -474,6 +504,7 @@
         for (var i = 0; i < actionsArray.length; i++) {
           var tableData = document.createElement("td");
           tableData.setAttribute("id", arr[0] + "-" + actionsArray[i].action);
+
           var dataIcon = document.createElement("button");
           dataIcon.setAttribute("title", actionsArray[i].action);
           dataIcon.setAttribute(
@@ -486,6 +517,7 @@
             "onClick",
             actionsArray[i].action + "Track('" + arr[0].toString() + "')"
           );
+          // console.log(tableData, "((((((((((((((((()))))))))))))))))");
           tableData.appendChild(dataIcon);
           tableRow.appendChild(tableData);
         }
@@ -581,9 +613,11 @@
         var startPoint = Math.floor(
           (region.start * audioBuffer.length) / totalAudioDuration
         );
+        console.log(startPoint);
         var endPoint = Math.ceil(
           (region.end * audioBuffer.length) / totalAudioDuration
         );
+        console.log(startPoint);
         var audioLength = endPoint - startPoint;
 
         var trimmedAudio = new AudioContext().createBuffer(
@@ -608,8 +642,6 @@
           sampleRate: trimmedAudio.sampleRate,
           length: trimmedAudio.length,
         };
-
-        console.log(startPoint);
       }
 
       function encodeAudioBufferLame(audioData) {
@@ -656,7 +688,8 @@
           };
         });
       }
-
+      let chutiya = document.querySelector(".wavesurfer-region");
+      console.log(chutiya, 11111111111111111111111111111111111111);
       // load audio starts
       // function loadAudio() {
       //   var element = document.getElementById("audio-file");
@@ -666,21 +699,21 @@
       //   }
 
       //    change the audio file format
-      
+
       function loadAudio() {
-         var element = document.getElementById("audio-file");
-         var supportedFormats = ["audio/mpeg", "audio/wav"];
+        var element = document.getElementById("audio-file");
+        var supportedFormats = ["audio/mpeg", "audio/wav"];
 
-          if (!element.files[0]) {
-              alert("No file selected");
-              return;
-          }
+        if (!element.files[0]) {
+          alert("No file selected");
+          return;
+        }
 
-          if (supportedFormats.includes(element.files[0].type)) {
-          } else {
-              alert("Invalid Format");
-              return;
-          }
+        if (supportedFormats.includes(element.files[0].type)) {
+        } else {
+          alert("Invalid Format");
+          return;
+        }
 
         audioFile = element.files[0];
         if (wavesurfer !== undefined) wavesurfer.destroy();
@@ -701,9 +734,10 @@
           totalAudioDuration = wavesurfer.getDuration();
           console.log(totalAudioDuration.toFixed(1));
           let monuTime = getRealTime(totalAudioDuration.toFixed(1));
-          console.log(monuTime)
-            document.getElementById("time-total").innerText =
-            getRealTime(totalAudioDuration.toFixed(1));
+          console.log(monuTime);
+          document.getElementById("time-total").innerText = getRealTime(
+            totalAudioDuration.toFixed(1)
+          );
           //change
           wavesurfer.enableDragSelection({});
           console.log(intro);
@@ -716,32 +750,38 @@
         wavesurfer.on("audioprocess", function () {
           if (wavesurfer.isPlaying()) {
             var currentTime = wavesurfer.getCurrentTime();
+            console.log(currentTime, "currentTime: ");
             document.getElementById("time-current").innerText =
               // currentTime.toFixed(1);
               getRealTime(currentTime.toFixed(1));
-            //changes  
+            //changes
           }
         });
         wavesurfer.on("region-created", function (newRegion) {
+          console.log(newRegion.wavesurfer.regions.list);
           var audioTracks = document.getElementById("audio-tracks").tBodies[0];
-          console.log("is this")
-          console.log(audioTracks.childNodes);
-          console.log(typeof audioTracks.childNodes);
           var tableRow = createAudioRow(
             new Array(newRegion.id, newRegion.start, newRegion.end)
-            );
-            audioTracks.appendChild(tableRow);
-            showAndHideMergeOption();
-          });
-          let raju = document.querySelector('.w3-hover-text-green')
-          console.log(raju[0])
+          );
+          console.log(newRegion, "new region row");
+
+          console.log(newRegion.start, "table row");
+          audioTracks.appendChild(tableRow);
+          showAndHideMergeOption();
+        });
         wavesurfer.on("region-update-end", function (newRegion) {
           document.getElementById(newRegion.id + 1).innerText =
-            0 >= newRegion.start.toFixed(4) ? 0 : newRegion.start.toFixed(4);
+            0 >= secondsToHHMMSS2(newRegion.start.toFixed(4))
+              ? 0
+              : secondsToHHMMSS2(newRegion.start.toFixed(4));
+
           document.getElementById(newRegion.id + 2).innerText =
             wavesurfer.getDuration() <= newRegion.end
-              ? wavesurfer.getDuration().toFixed(4)
-              : newRegion.end.toFixed(4);
+              ? secondsToHHMMSS2(wavesurfer.getDuration()) // change here to convert time format into any other format
+              : secondsToHHMMSS2(parseInt(newRegion.end));
+
+          console.log(secondsToHHMMSS2("66"), "output");
+          console.log("66" * 100, "outuoou");
           if (intro != undefined) {
             intro.exit();
           }
@@ -752,36 +792,33 @@
           .replace("w3-hide", "w3-show");
         audioButtons.setAttribute("class", audioButtonsClass);
       }
-
-      //load audio ends
       function getRealTime(seconds) {
         var sec, min, hour;
         var result = "";
-    
+
         if (seconds < 3600) {
-            var a = Math.floor(seconds / 60); // minutes
-            var b = seconds % 60; // seconds
-    
-            sec = b !== 1 ? "seconds" : "second";
-            min = a !== 1 ? "minutes" : "minute";
-    
-            result = `00:${a}:${b}`;
+          var a = Math.floor(seconds / 60); // minutes
+          var b = seconds % 60; // seconds
+
+          sec = b !== 1 ? "seconds" : "second";
+          min = a !== 1 ? "minutes" : "minute";
+
+          result = `00:${a}:${b}`;
         } else {
-            var a = Math.floor(seconds / 3600); // hours
-            var x = seconds % 3600;
-            var b = Math.floor(x / 60); // minutes
-            var c = seconds % 60; // seconds
-    
-            sec = c !== 1 ? "seconds" : "second";
-            min = b !== 1 ? "minutes" : "minute";
-            hour = a !== 1 ? "hours" : "hour";
-    
-          result = {hour:hour,min:min,sec:sec};
+          var a = Math.floor(seconds / 3600); // hours
+          var x = seconds % 3600;
+          var b = Math.floor(x / 60); // minutes
+          var c = seconds % 60; // seconds
+
+          sec = c !== 1 ? "seconds" : "second";
+          min = b !== 1 ? "minutes" : "minute";
+          hour = a !== 1 ? "hours" : "hour";
+
+          result = { hour: hour, min: min, sec: sec };
         }
-    
+
         return result;
-    }
-    
+      }
 
       function downloadAudio() {
         var anchorAudio = document.createElement("a");
