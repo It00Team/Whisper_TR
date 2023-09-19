@@ -8,6 +8,7 @@ from .uploadFile  import *
 from .deleteFile  import *
 from .segment  import *
 from .speakerFile  import *
+from datetime import datetime
 import os
 from rest_framework import status
 from pydub import AudioSegment
@@ -261,7 +262,9 @@ class Segmented_Text(APIView):
           audio1 = request.FILES.get('Audio_File')
           file_take = AudioSegment.from_file(audio1)
           samplerate = file_take.set_frame_rate(44100).set_sample_width(2).set_channels(2)
-          file_path = f'C:\\Users\\91722\\Desktop\\git vala folder\\Whisper_TR\\media\\{audio1}'
+          date = str(datetime.now())
+          fdate = date.replace(' ', '_').replace('.', '_').replace(':', '_').replace('-', '_')
+          file_path = f'C:\\Users\\91722\\Desktop\\git vala folder\\Whisper_TR\\media\\{audio1}'+fdate+".mp3"
           samplerate.export(file_path, format="wav")
           client = storage.Client(credentials=service_account.Credentials.from_service_account_file(r'C:\\tr_2\\main\\new.json'))
           bc_name = "avyaan_mgmt"
@@ -321,22 +324,30 @@ class Segmented_Text(APIView):
 class No_Segmented_Text(APIView): 
     def post(self, request,format=None):
       serializer = AudioService(data = request.data)
-      print(serializer)
       start_time = request.POST.get('start_time') 
       end_time = request.POST.get('end_time')
-      print(start_time,end_time)    
       language = request.POST.get('language')
       if serializer.is_valid():
           print(language)
-          print(type(start_time))
           audio1 = request.FILES.get('Audio_File')
           file_take = AudioSegment.from_file(audio1)
           samplerate = file_take.set_frame_rate(44100).set_sample_width(2).set_channels(2)
-          z1 = int(start_time) * 1000
-          z2 = int(end_time) * 1000
+          z1 = int(float(start_time) * 1000)
+          z2 = int(float(end_time) * 1000)
           print(z1,z2)
+          def miliseconds_to_hh_mm_ss(seconds):
+                hours = int(seconds // 3600)
+                minutes = int((seconds % 3600) // 60)
+                seconds = int(seconds % 60)
+                # milliseconds = int((seconds - int(seconds)) * 1000)
+                con  = f'{hours:02d}:{minutes:02d}:{seconds:02d}'
+                return con
+          started = miliseconds_to_hh_mm_ss(float(start_time))
+          ended = miliseconds_to_hh_mm_ss(float(end_time))
           segment = samplerate[z1 : z2]
-          file_paths = r'C:\\Users\\91722\\Desktop\\git vala folder\\Whisper_TR\\media\\audio1'+str(audio1)
+          date = str(datetime.now())
+          fdate = date.replace(' ', '_').replace('.', '_').replace(':', '_').replace('-', '_')
+          file_paths = r'C:\\Users\\91722\\Desktop\\git vala folder\\Whisper_TR\\media\\'+str(audio1)+fdate+".mp3"
           segment.export(file_paths, format="mp3")
           client = storage.Client(credentials=service_account.Credentials.from_service_account_file(r'C:\\tr_2\\main\\new.json'))
           bc_name = "avyaan_mgmt"
@@ -365,7 +376,6 @@ class No_Segmented_Text(APIView):
           for result in response.results:
             for alternative in result.alternatives:
                 text += alternative.transcript
-          print(text)
           try:
               bucket = client.bucket(bc_name)
               file_blob = bucket.blob(audio_path)
@@ -373,8 +383,8 @@ class No_Segmented_Text(APIView):
               print("deleted") 
           except Exception as e:
               print(e)  
-          final = "Speaker: " + "Start_Time:- "+ str(start_time)+" End_Time:- "+ str(end_time)+" Text:- " + str(text)    
-          serializer.save(name=str(audio1),description=text)
+          final = "Speaker_ : " + "Start_Time:- "+ str(started)+" End_Time:- "+ str(ended)+" Text:- " + str(text)    
+          serializer.save(name=str(audio1),description=final)
           return Response(final, status=status.HTTP_201_CREATED)
       return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
